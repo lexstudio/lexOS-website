@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lexOS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to lexOS</h1>
+        <p>The Lightweight and Flexible Linux Distribution</p>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="download.html">Download</a>
+        <a href="documentation.html">Documentation</a>
+        <a href="community.html">Community</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+    <div class="container">
+        <div class="hero">
+            <h2>Your OS, Your Way</h2>
+            <p>lexOS is designed to give you complete control over your system. Build your perfect environment with lexOS.</p>
+        </div>
+        <div class="content">
+            <div>
+                <h3>Download lexOS</h3>
+                <p>Get the latest version of lexOS and start building your perfect operating system.</p>
+                <button>Download Now</button>
+            </div>
+            <div>
+                <h3>Documentation</h3>
+                <p>Find guides, tutorials, and manuals to help you get the most out of lexOS.</p>
+                <button onclick="location.href='documentation.html'">Read Docs</button>
+            </div>
+            <div>
+                <h3>Join the Community</h3>
+                <p>Connect with other lexOS users, share tips, and get help from the community.</p>
+                <button>Join Now</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 lexOS. All rights reserved.</p>
+    </footer>
+    <script>
+        // Add interactivity if needed
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                alert('Button clicked!');
+            });
+        });
+    </script>
+</body>
+</html>
+
