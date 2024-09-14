@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lim text editor and minkernel update</title>
+    <style>
+        black-text {
+          color: black;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        header {
+            background-color: #343a40;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        nav {
+            background-color: #495057;
+            overflow: hidden;
+        }
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            background-color: #343a40;
+        }
+        .container {
+            padding: 20px;
+        }
+        .content h3 {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+ 
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>lexOS Documentation</h1>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        
+        <a href="documentation.html">Documentation</a>
+        <a href="blog.html">Blog</a>
+        
+    </nav>
+    <div class="container">
+        <div class="content">
+<div class="like-section">
+    <button id="likeButton" onclick="handleLike()">👍 Like</button>
+    <p id="likeCount">Likes: 0</p>
+</div>
+
+<script>
+    let likeCount = 0;
+
+    // Check if the user has already liked
+    window.onload = function() {
+        if (localStorage.getItem('liked') === 'true') {
+            document.getElementById('likeButton').disabled = true;
+            document.getElementById('likeButton').innerText = 'Liked';
+        }
+    };
+
+    function handleLike() {
+        if (localStorage.getItem('liked') !== 'true') {
+            likeCount++;
+            document.getElementById('likeCount').innerText = `Likes: ${likeCount}`;
+            localStorage.setItem('liked', 'true'); // Mark as liked
+            document.getElementById('likeButton').disabled = true; // Disable button
+            document.getElementById('likeButton').innerText = 'Liked'; // Update button text
+        }
+    }
+</script>
+          <h4>Subject</h4>
+          <p>This week subject (9-15 2024) is the new text editor update</p>
+          
+          <h4>New interface</h4>
+          <p>I made a new interface that looks much better than previous one</p>
+          <p>I added a collor scheme and change the keyboard commands</p>
+          <p>Keep in mind that the text editor is still in beta and it doesnt work that well in lexOS or linux changes can appear</p>
+          <p>screenshoots</p>
+          <img src="swappy-20240909_162327.png" alt="Description of image" style="width: 1600px; height: auto;">
+          <p></p>
+          <p></p>
+          
+          <h4>Low level problems</h4>
+          <p>The text editor is still in beta the interface is working pretty well but in a low level it doesn't work that well</p>
+          <p>some errors are that buffer memory initializer isn't giving enogh memory like if you open a bigger file it can crash or work very slow.</p>
+          <img src="swappy-20240911_201631.png" alt="" style="width: auto; height: auto;">
+          <p>another one is when kernel is called for saving or even run the app it can appear the error file isn't an executable , kernel kill process or even kernel cant run </p>
+          <p>either of this error doesn't broke the system witch is eating my hour and days thinking why it doesnt really work. The way it needs to work is this:</p>
+          <img src="swappy-20240911_211500.png" alt="" style="width: auto; height: auto;">
+          <p>This error can be because the kernel caller isn't well made or that the handler for the functions that it gets isn't working properly</p>
+          <p></p>
+          <p></p>
+          <h4>Progress</h4>
+          <p>I can say that the new editor will be finished soon , probably nexxt week if i have time because the school has started :( but i will try to make as much free time to work on blogs and lexOS</p>
+          <p>The interface is 100% ready but it could have some minor details that will be changed . In the low level part i will make it work even if i will edit the whole minkernel :).</p>
+          <p>Yeah so if you dont like the interface i tried my best to make it looks good but this is what i can (even in neovim i use chadnvim not my own config )</p>
+          <h4>Minkernel update coming soon</h4>
+          <p>At moment i write this the minkernel 0.0.3 isn't finished its about 60% finished</p>
+          <p>Minkernel 0.0.3 is coming soon with a better allocator a faster file manager and some added things to customizability</p>
+          <p>And some more things is that the kernel is going to be upgraded to support better or to make lim work</p>
+          <h4>Contact</h4>
+          <p>For anything else i wait you in matrix/element in my server https://matrix.to/#/#lexos:matrix.org wait you there to have some tips for c go or rust for lowlevel or apps.I will even join sometimes in a voice group to chat and program in a team :)</p>
+          <p>0</p>
+          <p>0</p>
+          <p>0</p>
+          <p>0</p>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 lexOS. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
