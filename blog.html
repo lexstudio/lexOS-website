@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lim text editor and minkernel update</title>
+    <title>>Making lim finally work and the minkernel 0.0.3</title>
     <style>
         black-text {
           color: black;
@@ -56,7 +56,7 @@
 </head>
 <body>
     <header>
-        <h1>lexOS Documentation</h1>
+        <h1>Making lim finally work and the minkernel 0.0.3</h1>
     </header>
     <nav>
         <a href="index.html">Home</a>
@@ -73,7 +73,7 @@
 </div>
 
 <script>
-    let likeCount = 2;
+    let likeCount = 1;
 
     // Check if the user has already liked
     window.onload = function() {
@@ -93,36 +93,56 @@
         }
     }
 </script>
+
           <h4>Subject</h4>
-          <p>This week subject (9-15 2024) is the new text editor update</p>
+          <p>This week subject (16.09.2024-22.09.2024) is how i made lim working perfectly and about the minkernel 0.0.3</p>
+         
+          <h4>Making lim finally work</h4>
+          <p></p>
+          <p>So directly, i found out that the problem was in syscalls and Buffercaller</p>
+          <p>Explanation is that the system caller was very poor made like to call the kernel to get input from keyboard (or any driver) you needed firstly to make a Buffer supporter then use the syscaller (that could to not give you all the things you need) to try to receiv input but even then you will need to make an input Buffer so if in your code you need input you had to type about 20-50 lines of code</p>
+          <p>Because lim needs input for shortcuts this was a very painful proccess</p>
+          <p>Now with the new syscaller it works like this</p>
+          <img src="swappy-20240918_214145.png" alt="" style="width: auto; height: auto;">
+          <p>Ironic is that this solved the Buffer problem</p>
+          <p>So yeah the problem was only from syscaller that was made very very poor</p>
           
-          <h4>New interface</h4>
-          <p>I made a new interface that looks much better than previous one</p>
-          <p>I added a collor scheme and change the keyboard commands</p>
-          <p>Keep in mind that the text editor is still in beta and it doesnt work that well in lexOS or linux changes can appear</p>
-          <p>screenshoots</p>
-          <img src="swappy-20240909_162327.png" alt="Description of image" style="width: 1600px; height: auto;">
+          <h4>Minkernel 0.0.3</h4>
+          <p>This is the most important version for me because this is what the FIRST MINKERNEL VERSION SHOULD HAVE LOOKED LIKE so yeah fuck it</p>
+          <p>The first and the most important thing that i changed is the syscaller that now is working properly and you can finally make system calls much easier than before</p>
+          <p>The way it works is that when you make a system call you make a buffer that has the information of what you need then systemcallerverf (function) verifies in a "data base" and archive them in a new buffer then it just give to your program the things you need</p>
+          <img src="swappy-20240918_213726.png" alt="" style="width: auto; height: auto;">
           <p></p>
+          <p>The next things that i update is the allocator that now has his own directory with a little calculator before allocation and it can do the calculation while the program starts</p>
+          <p>allocator is now much better so you will see some new apps and tools for lexOS because now the allocator works better and in the next segment we will se the support update</p>
           <p></p>
-          
-          <h4>Low level problems</h4>
-          <p>The text editor is still in beta the interface is working pretty well but in a low level it doesn't work that well</p>
-          <p>some errors are that buffer memory initializer isn't giving enogh memory like if you open a bigger file it can crash or work very slow.</p>
-          <img src="swappy-20240911_201631.png" alt="" style="width: auto; height: auto;">
-          <p>another one is when kernel is called for saving or even run the app it can appear the error file isn't an executable , kernel kill process or even kernel cant run </p>
-          <p>either of this error doesn't broke the system witch is eating my hour and days thinking why it doesnt really work. The way it needs to work is this:</p>
-          <img src="swappy-20240911_211500.png" alt="" style="width: auto; height: auto;">
-          <p>This error can be because the kernel caller isn't well made or that the handler for the functions that it gets isn't working properly</p>
+          <p>The support for apps and interface now is getting bigger</p>
+          <p>the support in minkernel is an essential part in minkernel for apps so now we have a fact about minkernel:</p>
+          <p>All the apps, tools and code that runs on minkernel (like the interface or the lim text editor) work on the third layer of minkernel named support, here apps get their permition run ONLY until it's stopped (to work on background it need to work with management section in minkernel), if you make an app you don't need to do anything only if you want it to run in background</p>
+          <p>the support really needs to be perfect to support any code, some codes can have some problems so please test the code before you post it</p>
           <p></p>
-          <p></p>
-          <h4>Progress</h4>
-          <p>I can say that the new editor will be finished soon , probably nexxt week if i have time because the school has started :( but i will try to make as much free time to work on blogs and lexOS</p>
-          <p>The interface is 100% ready but it could have some minor details that will be changed . In the low level part i will make it work even if i will edit the whole minkernel :).</p>
-          <p>Yeah so if you dont like the interface i tried my best to make it looks good but this is what i can (even in neovim i use chadnvim not my own config )</p>
-          <h4>Minkernel update coming soon</h4>
-          <p>At moment i write this the minkernel 0.0.3 isn't finished its about 60% finished</p>
-          <p>Minkernel 0.0.3 is coming soon with a better allocator a faster file manager and some added things to customizability</p>
-          <p>And some more things is that the kernel is going to be upgraded to support better or to make lim work</p>
+          <p>Now some performance testing with the updated i32 and u64</p>
+          <p>First we will have i32 vs u32</p>
+          <img src="swappy-20240920_155607.png" alt="" style="width: auto; height: auto;">
+          <p>First lets set up the measure of the chart</p>
+          <p>the numbers indicate the Bytes transfer speed</p>
+          <p>The i32 had the max point at 35B but that doesn't mean that is consistent, at the lowest it got at 32 witch still easily beats u32</p>
+          <p>Even if u32 is more slower it is more consistent the slowest it got was 29 at that was at start</p>
+          <p>i normaly is more faster than u but just because it isnt consistent and the upper you get with numbers the more big the gap is</p>
+          <p>like i64 tehnically can go up to 71Bytes witch is faster than 68 from u64 but the gap goes to 67 at this is not only at start </p>
+          <p>Plus u can be made faster than i if it is optimized correctly</p>
+          <p>Next lets see the update for u64</p>
+          <img src="swappy-20240924_191715.png" alt="" style="width: auto; height; auto;">
+          <p>Little story before we begin the first chart that i made from this update said that u64 goes only to 68 but after i recompile the kernel it got to 69</p>
+          <p>As we see u64 now perform better than the last generation</p>
+          <p>The u64 new perform better because some function now support better u64 and the base definition of u64 is now upgraded</p>
+
+
+
+
+
+
+
           <h4>Contact</h4>
           <p>For anything else i wait you in matrix/element in my server https://matrix.to/#/#lexos:matrix.org wait you there to have some tips for c go or rust for lowlevel or apps.I will even join sometimes in a voice group to chat and program in a team :)</p>
           <p>0</p>
